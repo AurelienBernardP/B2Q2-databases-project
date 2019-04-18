@@ -35,7 +35,7 @@
                   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                   echo 'Connected to the database <br> <br>';
 
-                  //---------------- Insitution table ----------------
+                  /*---------------- Insitution table ----------------*/
                   echo '<strong><em>Creating insitution table</em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -69,7 +69,7 @@
                      echo "Unable to create and/or load institution table: " . $e->getMessage();
                   }
 
-                  //---------------- Revue table ----------------
+                  /*---------------- Revue table ----------------*/
                   echo '<strong><em> Creating revue table </em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -100,7 +100,7 @@
                      echo "Unable to create and/or load revue table:" . $e->getMessage();
                   }
 
-                  //---------------- Conference table ----------------
+                  /*---------------- Conference table ----------------*/
                   echo '<strong><em>Creating conference table </em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -136,7 +136,7 @@
                      echo "Unable to create and/or load conference table:" . $e->getMessage();
                   }
 
-                  //---------------- Author table ----------------
+                  /*---------------- Author table ----------------*/
                   echo '<strong><em>Creating author table</em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -171,7 +171,7 @@
                      echo "Unable to create and/or load author table:" . $e->getMessage();
                   }
 
-                  //---------------- Aritcle table ----------------
+                  /*---------------- Aritcle table ----------------*/
                   echo '<strong><em>Creating article table</em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -206,7 +206,7 @@
                      echo "Unable to create and/or load aritcle table:" . $e->getMessage();
                   }
 
-                  //---------------- Aritcle subject table ----------------
+                  /*---------------- Aritcle subject table ----------------*/
                   echo '<strong><em>Creating article subject table</em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -239,7 +239,7 @@
                      echo "Unable to create and/or load article subject table:" . $e->getMessage();
                   }
 
-                  //---------------- Second author table ----------------
+                  /*---------------- Second author table ----------------*/
                   echo '<strong><em>Creating second author table</em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -274,7 +274,7 @@
                      echo "Unable to create and/or load second author table:" . $e->getMessage();
                   }
 
-                  //---------------- Paper article table ----------------
+                  /*---------------- Paper article table ----------------*/
                   echo '<strong><em>Creating paper article table</em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -311,7 +311,7 @@
                      echo "Unable to create and/or load paper article table:" . $e->getMessage();
                   }
 
-                  //---------------- Conference article table ----------------
+                  /*---------------- Conference article table ----------------*/
                   echo '<strong><em>Creating conference article table</em></strong><br>';
                   try{
                      $db->beginTransaction();
@@ -347,7 +347,7 @@
                      echo "Unable to create and/or load conference article table:" . $e->getMessage();
                   }
 
-                  //---------------- Participant table ----------------
+                  /*---------------- Participant table ----------------*/
                   echo '<strong><em>Creating participant table</em></strong><br>';
                   try{
                      $db->beginTransaction();
