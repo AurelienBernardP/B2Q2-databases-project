@@ -10,7 +10,7 @@
             <?php
                $dsn = "mysql:host=ms800.montefiore.ulg.ac.be";
                $user = "group14";
-               $password = "";
+               $password = "qsEtZcVPct";
                $dbname = "group14";
 
                /*//if data does not exist
