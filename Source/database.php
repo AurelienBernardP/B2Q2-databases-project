@@ -51,10 +51,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Institution.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/institutions.csv'
                         INTO TABLE Institution
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         ignore 1 lines(nom, rue, numero, ville, pays);"
                      );
@@ -82,10 +82,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Revue.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/revues.csv'
                         INTO TABLE Revue
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(nom, impact);"
                      );
@@ -118,10 +118,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Conference.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/conferences.csv'
                         INTO TABLE Conference
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(nom, annee, rue, numero, ville, pays);"
                      );
@@ -154,10 +154,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Auteur.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/auteurs.csv'
                         INTO TABLE Auteur
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(matricule, nom, prenom, debut_doctorat, nom_institution);"
                      );
@@ -189,10 +189,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Article.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/articles.csv'
                         INTO TABLE Article
-                        FIELDS TERMINATED BY ','
-                        RevueED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(url, doi, titre, date_publication, matricule_premier_auteur);"
                      );
@@ -222,10 +222,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Sujet_Article.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/sujets_articles.csv'
                         INTO TABLE Sujet_Article
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(url, sujet);"
                      );
@@ -257,10 +257,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Second_Auteur.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/seconds_auteurs.csv'
                         INTO TABLE Second_Auteur
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(url, matricule_second_auteur);"
                      );
@@ -294,10 +294,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Article_Journal.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/articles_journaux.csv'
                         INTO TABLE Article_Journal
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(url, pg_debut, pg_fin, nom_revue, n_journal);"
                      );
@@ -330,10 +330,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Article_Conference.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/articles_conferences.csv'
                         INTO TABLE Article_Conference
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(url, presentation, nom_conference, annee_conference);"
                      );
@@ -367,10 +367,10 @@
                      );
 
                      //Loading data
-                     $db->exec("LOAD DATA LOCAL INFILE 'tables/Participation.csv'
+                     $db->exec("LOAD DATA LOCAL INFILE 'tables/participations_conferences.csv'
                         INTO TABLE Participation
-                        FIELDS TERMINATED BY ','
-                        ENCLOSED BY ','
+                        FIELDS TERMINATED BY ';'
+                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(matricule, nom_conference, annee_conference, tarif);"
                      );
