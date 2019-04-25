@@ -16,6 +16,8 @@ else{
             <div id= article_type_choice>
                 <h1><center>Ajouter un article</center></h1>
                 <br/>
+                <h3><a href="main_menu.php"><center>revenir vers le menu</center></a></h3>
+                <br/>
                 <form id="choice_form" method="post" onchange="document.getElementById('choice_form').submit();">
                     <p>
                         <strong>Veillez choisir le type d'article que vous voulez insérer</strong>
@@ -52,14 +54,14 @@ else{
                             case "conference":
                                 ?>
                                     <label for="nom_conférence">Nom de la conférence<input type="text" name="nom_conf" />
-                                    <br />
+                                    <br/>
                                     <label for="anne_conf">Année dans laquelle la conférance a eu lieu<input type="number" name="year_conf" />
-                                    <br />  
+                                    <br/>  
                                     <label for="presentation">Type de présentation<input type="text" name="presentation" />
-                                    <br />
+                                    <br/>
                                     <!--subjects have to be added-->
-                                    <input type="submit" value="Submit">     
-                                    <br/>                  
+                                    <button name="submit_article" type="submit" value="submit_conf">Mettre à jour la BD</button>     
+                                    <br/>
                                 <?php
                                 break;
                             case "journal":
@@ -72,7 +74,7 @@ else{
                                     <br />
                                     <label for="page_fin">Page ou l'article termine<input type="number" name="pg_fin" />
                                     <br />  
-                                    <input type="submit" value="Submit">  
+                                    <button name="submit_article" type="submit" value="submit_journal">Mettre à jour la BD</button> 
                                     <br/>
                                 
                                 <?php
@@ -80,8 +82,13 @@ else{
                             default:
                                 break;
                         }
+                        if(isset($_POST['submit_article']) AND $_POST['submit_article']=="submit_conf"){
+                            header('location:submit_conf.php');
+                        }elseif(isset($_POST['submit_article']) AND $_POST['submit_article']=="submit_journal"){
+                            header('location:submit_journal.php');
+                        }
                     }
-                                ?>
+                        ?>
                         </form>
             </div>
         </body>
