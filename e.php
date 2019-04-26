@@ -22,7 +22,7 @@ else{
             </div>
             <div id="table of subjects">
             <?php
-            $queryE = $bd->query(‘SELECT sujet
+            $queryE = $bd->query("SELECT sujet
                                     FROM Sujet_Article NATURAL JOIN (SELECT url FROM Article_Conference) NATURAL JOIN
                                             (SELECT nom_conference , annee_conference
                                             FROM (SELECT nom_conference, annee_conferece 
@@ -32,11 +32,11 @@ else{
                                             ORDER BY COUNT(*) DESC
                                             LIMIT 5)
                                     GROUP BY sujet 
-                                    ORDER BY COUNT(sujet) DESC
-                                    ’);
-            echo "<h3><center> Sujets <center><h3>"
+                                    ORDER BY COUNT(sujet) DESC;"
+                                );
+            echo "<h3><center>","Sujets en ordre d'écroissant de popularité","</center><h3>";
             while($tupleE = $queryE->fetch()){
-                echo "<p><center> $tupleE[‘sujet'] <center></p>";
+                echo "<p>".$tupleE['sujet']."</p>";
             }
         
             ?>
