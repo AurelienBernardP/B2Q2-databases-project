@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <html>
    <head>
       <title>Loading data</title>
    </head>
    <body>
       <center>
+         <a href="logout.php"> Logout page. </a>
          <h1>Loading data</h1>
          <div class=main_container style="width:600px; margin-top:20px;">
             <?php
@@ -13,27 +13,17 @@
                $password = "qsEtZcVPct";
                $dbname = "group14";
 
-               /*//if data does not exist
-               try{
-                  echo '<strong><em>Creating database</em></strong><br>';
-                  $db = new PDO($dsn, $user, $password,[PDO::MYSQL_ATTR_LOCAL_INFILE => true]);
-                  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                  $sql = "create database $dbname character set 'utf8'";
-                  $db->exec($sql);
-                  echo "Database created succesfully. <br>";
-               }
-               catch (PDOExecption $e){
-                  echo 'Unable to create databse: ' . $e->getMessage();
-               }
-               $db = NULL;
-               */
-               
                try{
-               //Connecting to database
+
+                  //Connecting to database
                   $db = new PDO("mysql:host=ms800.montefiore.ulg.ac.be;dbname=group14", $user, $password); //variable bd connection
                   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                   echo 'Connected to the database <br> <br>';
+
+
+               /*------------------- Creating tables and loading data -------------------*/
+
 
                   /*---------------- Insitution table ----------------*/
                   echo '<strong><em>Creating insitution table</em></strong><br>';
@@ -42,11 +32,12 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Institution(
-                        nom VARCHAR(50) PRIMARY KEY,
+                        nom VARCHAR(50) NOT NULL,
                         rue VARCHAR(50) NOT NULL,
                         numero VARCHAR(5) NOT NULL,
                         ville VARCHAR(50) NOT NULL,
                         pays VARCHAR(50) NOT NULL,
+                        PRIMARY KEY (nom)
                         )engine = innodb;"
                      );
 
@@ -76,9 +67,10 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Revue(
-                        nom VARCHAR(50) PRIMARY KEY,
+                        nom VARCHAR(50) NOT NULL,
                         impact INT NOT NULL,
-                        )engine=InnoDB;"
+                        PRIMARY KEY (nom)
+                        )engine=innodb;"
                      );
 
                      //Loading data
@@ -107,14 +99,14 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Conference(
-                        nom VARCHAR(50) NOT NULL,
+                        nom VARCHAR(200) NOT NULL,
                         annee SMALLINT NOT NULL,
                         rue VARCHAR(50) NOT NULL,
                         numero VARCHAR(5) NOT NULL,
                         ville VARCHAR(50) NOT NULL,
                         pays VARCHAR(50) NOT NULL,
-                        PRIMARY KEY (nom, annee),
-                        )engine=InnoDB;"
+                        PRIMARY KEY (nom, annee)
+                        )engine=innodb;"
                      );
 
                      //Loading data
@@ -143,14 +135,15 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Auteur(
-                        matricule INT PRIMARY KEY,
+                        matricule INT NOT NULL,
                         nom VARCHAR(50) NOT NULL,
                         prenom VARCHAR(50) NOT NULL,
-                        debut_doctorat SMALLINT NOT NULL,
+                        debut_doctorat INT NOT NULL,
                         nom_institution VARCHAR(50) NOT NULL,
-                        FOREIGN KEY nom_institution
-                           REFERENCES Institution(nom_institution)
-                        )engine=InnoDB;"
+                        PRIMARY KEY (matricule),
+                        FOREIGN KEY (nom_institution)
+                           REFERENCES Institution(nom)
+                        )engine=innodb;"
                      );
 
                      //Loading data
@@ -178,16 +171,18 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Article(
-                        url VARCHAR(2083) PRIMARY KEY,
-                        doi INT NOT NULL,
-                        titre VARCHAR(50) NOT NULL,
-                        date_publication SMALLINT NOT NULL,
+                        url VARCHAR(500) NOT NULL,
+                        doi BIGINT NOT NULL,
+                        titre VARCHAR(500) NOT NULL,
+                        date_publication DATE NOT NULL,
                         matricule_premier_auteur INT NOT NULL,
-                        FOREIGN KEY matricule_premier_auteur
+                        PRIMARY KEY (url),
+                        FOREIGN KEY (matricule_premier_auteur)
                            REFERENCES Auteur(matricule)
-                        )engine=InnoDB;;"
+                        )engine=innodb;"
                      );
 
+                     echo "Here";
                      //Loading data
                      $db->exec("LOAD DATA LOCAL INFILE 'tables/articles.csv'
                         INTO TABLE Article
@@ -203,7 +198,7 @@
                   }
                   catch(PDOExecption $e){
                      $db->rollback();
-                     echo "Unable to create and/or load aritcle table:" . $e->getMessage();
+                     echo "Unable to create and/or load article table:" . $e->getMessage();
                   }
 
                   /*---------------- Aritcle subject table ----------------*/
@@ -213,12 +208,12 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Sujet_Article(
-                        url VARCHAR(2083) NOT NULL,
+                        url VARCHAR(500) NOT NULL,
                         sujet VARCHAR(50) NOT NULL,
                         PRIMARY KEY (url, sujet),
-                        FOREIGN KEY url
+                        FOREIGN KEY (url)
                            REFERENCES Article(url)
-                        )engine=InnoDB;"
+                        )engine=innodb;"
                      );
 
                      //Loading data
@@ -246,14 +241,14 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Second_Auteur(
-                        url VARCHAR(2083) NOT NULL,
+                        url VARCHAR(500) NOT NULL,
                         matricule_second_auteur INT NOT NULL,
                         PRIMARY KEY (url, matricule_second_auteur),
-                        FOREIGN KEY matricule_second_auteur
-                           REFERENCES Auteur(matricule)
-                        FOREIGN KEY url
+                        FOREIGN KEY (matricule_second_auteur)
+                           REFERENCES Auteur(matricule),
+                        FOREIGN KEY (url)
                            REFERENCES Article(url)
-                        )engine=InnoDB;"
+                        )engine=innodb;"
                      );
 
                      //Loading data
@@ -281,16 +276,17 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Article_Journal(
-                        url VARCHAR(2083) PRIMARY KEY,
+                        url VARCHAR(500) NOT NULL,
                         pg_debut SMALLINT NOT NULL,
                         pg_fin SMALLINT NOT NULL,
                         nom_revue VARCHAR(50) NOT NULL,
                         n_journal INT NOT NULL,
-                        FOREIGN KEY url
-                           REFERENCES Article(url)
-                        FOREIGN KEY nom_revue
+                        PRIMARY KEY (url),
+                        FOREIGN KEY (url)
+                           REFERENCES Article(url),
+                        FOREIGN KEY (nom_revue)
                            REFERENCES Revue(nom)
-                        )engine=InnoDB;"
+                        )engine=innodb;"
                      );
 
                      //Loading data
@@ -318,15 +314,16 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Article_Conference(
-                        url VARCHAR(2083) PRIMARY KEY,
-                        presentation VARCHAR(50) NOT NULL,
-                        nom_conference VARCHAR(50) NOT NULL,
+                        url VARCHAR(500) NOT NULL,
+                        presentation VARCHAR(200) NOT NULL,
+                        nom_conference VARCHAR(200) NOT NULL,
                         annee_conference SMALLINT NOT NULL,
-                        FOREIGN KEY url
-                           REFERENCES Article(url)
+                        PRIMARY KEY (url),
+                        FOREIGN KEY (url)
+                           REFERENCES Article(url),
                         FOREIGN KEY (nom_conference, annee_conference)
                            REFERENCES Conference(nom, annee)
-                        )engine=InnoDB;"
+                        )engine=innodb;"
                      );
 
                      //Loading data
@@ -357,13 +354,13 @@
                         matricule INT NOT NULL,
                         nom_conference VARCHAR(50) NOT NULL,
                         annee_conference SMALLINT NOT NULL,
-                        tarif INT NOT NULL,
+                        tarif VARCHAR(50) NOT NULL,
                         PRIMARY KEY (matricule, nom_conference, annee),
-                        FOREIGN KEY matricule
-                           REFERENCES Auteur(matricule)
+                        FOREIGN KEY (matricule)
+                           REFERENCES Auteur(matricule),
                         FOREIGN KEY (nom_conference, annee_conference)
                            REFERENCES Conference(nom, annee)
-                        )engine=InnoDB;"
+                        )engine=innodb;"
                      );
 
                      //Loading data
@@ -389,8 +386,9 @@
                }
 
             //Disconnecting from server
-            $db = NULL;
-            echo 'You have been disconnected. <br><br>';
+           // $db = NULL;
+            header('location:main_menu.php');
+            //echo 'You have been disconnected. <br><br>';
             ?>
          </div>
       </center>
