@@ -15,7 +15,8 @@ else{
       <body>
          <h1><center>Bienvenue sur le menu principal</center></h1>
          <br/>
-         <div class="conteneur_principale">
+         <a href="logout.php"> Logout page. </a>
+         <div class="main_container">
          <div id="mainMenu">
          <form id="section1" method="post" action="" onchange="document.getElementById('section1').submit();">
             <p>
@@ -40,7 +41,7 @@ else{
             if(isset($_POST['decision'])){
                switch($_POST['decision']){
                   case "a":
-                     header('lcation:a.php');
+                     header('location:a.php');
                      break;
 
                   case "b":
