@@ -330,7 +330,6 @@
                      $db->exec("LOAD DATA LOCAL INFILE 'tables/articles_conferences.csv'
                         INTO TABLE Article_Conference
                         FIELDS TERMINATED BY ';'
-                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(url, presentation, nom_conference, annee_conference);"
                      );
@@ -355,7 +354,7 @@
                         nom_conference VARCHAR(50) NOT NULL,
                         annee_conference SMALLINT NOT NULL,
                         tarif VARCHAR(50) NOT NULL,
-                        PRIMARY KEY (matricule, nom_conference, annee),
+                        PRIMARY KEY (matricule, nom_conference, annee_conference),
                         FOREIGN KEY (matricule)
                            REFERENCES Auteur(matricule),
                         FOREIGN KEY (nom_conference, annee_conference)
@@ -365,9 +364,8 @@
 
                      //Loading data
                      $db->exec("LOAD DATA LOCAL INFILE 'tables/participations_conferences.csv'
-                        INTO TABLE Participation
+                        INTO TABLE Participation_Conference
                         FIELDS TERMINATED BY ';'
-                        ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
                         IGNORE 1 LINES(matricule, nom_conference, annee_conference, tarif);"
                      );
