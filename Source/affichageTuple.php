@@ -339,7 +339,10 @@ function requestA($table){
       <h1><center>Résultat requête A</center></h1>
       <br/>
 
-      <?php requestA($_POST['table']); ?>
+      Début d'affichage de 
+      <?php echo 'la table :' . $_POST['table'];
+      requestA($_POST['table']); ?>
+      Fin de l'affichage de la table
 
    </body>
 </html>
