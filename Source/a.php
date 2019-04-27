@@ -1,3 +1,12 @@
+<?php
+    include 'connexion_info.php';
+    if(isset($_SESSION['connect']) AND $_SESSION['connect'] == 0){
+      echo'Cannot view this page without being connected<br>';
+      echo'Click here to establish a connection <a href="connexion.php">Connexion</a>';
+      session_destroy();
+   }
+   else{
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,3 +42,4 @@
 
    </body>
 </html>
+<?php } ?>

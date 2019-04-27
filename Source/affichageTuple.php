@@ -1,6 +1,15 @@
 <?php
+    include 'connexion_info.php';
+    if(isset($_SESSION['connect']) AND $_SESSION['connect'] == 0){
+      echo'Cannot view this page without being connected<br>';
+      echo'Click here to establish a connection <a href="connexion.php">Connexion</a>';
+      session_destroy();
+   }
+   else{
+?>
+<?php
 function requestA($table){
-   switch($table){
+      switch($table){
       
       // Auteur
       case 'Auteur' :
@@ -21,9 +30,9 @@ function requestA($table){
          if($_GET['nom_institution'])
             $condition .= ' AND nom_institution = ' . $_GET['nom_institution'];
 
-         $req = $bdd->query('SELECT * 
-                             FROM Auteur
-                             WHERE ' . condition);
+         $req = $bd->query('SELECT * 
+                            FROM Auteur
+                            WHERE ' . condition);
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -53,9 +62,9 @@ function requestA($table){
          if($_GET['pays'])
             $condition .= ' AND pays = ' . $_GET['pays'];
 
-         $req = $bdd->query('SELECT * 
-                             FROM Institution
-                             WHERE ' . condition);
+         $req = $bd->query('SELECT * 
+                            FROM Institution
+                            WHERE ' . condition);
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -76,9 +85,9 @@ function requestA($table){
          if($_GET['impact'])
             $condition .= ' AND impact = ' . $_GET['impact'];
          
-         $req = $bdd->prepare('SELECT * 
-                               FROM Revue
-                               WHERE ' . condition);
+         $req = $bd->query('SELECT * 
+                            FROM Revue
+                            WHERE ' . condition);
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -111,7 +120,7 @@ function requestA($table){
          if($_GET['pays'])
             $condition .= ' AND pays = ' . $_GET['pays'];
 
-         $req = $bdd->query('SELECT * 
+         $req = $bd->query('SELECT * 
                                FROM Conference
                                WHERE ' . condition);
 
@@ -143,7 +152,7 @@ function requestA($table){
          if($_GET['matricule_premier_auteur'])
             $condition .= ' AND matricule_premier_auteur = ' . $_GET['matricule_premier_auteur'];
       
-         $req = $bdd->query('SELECT * 
+         $req = $bd->query('SELECT * 
                              FROM Article
                              WHERE ' . condition);
 
@@ -167,7 +176,7 @@ function requestA($table){
          if($_GET['sujet'])
             $condition .= ' AND sujet = ' . $_GET['sujet'];
 
-         $req = $bdd->query('SELECT * 
+         $req = $bd->query('SELECT * 
                                FROM Sujet_Article
                                WHERE ' . condition);
 
@@ -190,7 +199,7 @@ function requestA($table){
          if($_GET['matricule_second_auteur'])
             $condition .= ' AND matricule_second_auteur = ' . $_GET['matricule_second_auteur'];
 
-         $req = $bdd->query('SELECT * 
+         $req = $bd->query('SELECT * 
                                FROM Second_Auteur
                                WHERE ' . condition);
 
@@ -222,7 +231,7 @@ function requestA($table){
          if($_GET['n_journal'])
             $condition .= ' AND n_journal = ' . $_GET['n_journal'];
 
-         $req = $bdd->query('SELECT * 
+         $req = $bd->query('SELECT * 
                                FROM Article_Journal
                                WHERE ' . condition);
 
@@ -251,7 +260,7 @@ function requestA($table){
          if($_GET['annee_conference'])
             $condition .= ' AND annee_conference = ' . $_GET['annee_conference'];
          
-         $req = $bdd->query('SELECT * 
+         $req = $bd->query('SELECT * 
                                FROM Article_Journal
                                WHERE ' . condition);
 
@@ -280,7 +289,7 @@ function requestA($table){
          if($_GET['tarif'])
             $condition .= ' AND tarif = ' . $_GET['tarif'];
          
-         $req = $bdd->query('SELECT * 
+         $req = $bd->query('SELECT * 
                                FROM Participation_Conference
                                WHERE ' . condition);
 
@@ -314,3 +323,4 @@ function requestA($table){
 
    </body>
 </html>
+<?php } ?>
