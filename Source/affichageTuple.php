@@ -32,12 +32,14 @@ function requestA($table){
 
          $req = $bd->query('SELECT * 
                             FROM Auteur
-                            WHERE ' . condition);
+                            WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
          {
-	         echo '<li>' . $donnees['matricule'] . ' ' . $donnees['nom'] . ' ' . $donnees['prenom'] . ' ' . $donnees['debut_doctorat'] . ' ' . $donnees['nom_institution'] . '</li>';
+	         echo '<li> Auteur :' . $donnees['matricule'] . ' ' . $donnees['nom'] . ' ' . $donnees['prenom'] . ' ' . $donnees['debut_doctorat'] . ' ' . $donnees['nom_institution'] . '</li>';
          }
          echo '</ul>';
          $req->closeCursor();
@@ -64,7 +66,9 @@ function requestA($table){
 
          $req = $bd->query('SELECT * 
                             FROM Institution
-                            WHERE ' . condition);
+                            WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -87,7 +91,9 @@ function requestA($table){
          
          $req = $bd->query('SELECT * 
                             FROM Revue
-                            WHERE ' . condition);
+                            WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -122,7 +128,9 @@ function requestA($table){
 
          $req = $bd->query('SELECT * 
                                FROM Conference
-                               WHERE ' . condition);
+                               WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -154,7 +162,9 @@ function requestA($table){
       
          $req = $bd->query('SELECT * 
                              FROM Article
-                             WHERE ' . condition);
+                             WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -178,7 +188,9 @@ function requestA($table){
 
          $req = $bd->query('SELECT * 
                                FROM Sujet_Article
-                               WHERE ' . condition);
+                               WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -201,7 +213,9 @@ function requestA($table){
 
          $req = $bd->query('SELECT * 
                                FROM Second_Auteur
-                               WHERE ' . condition);
+                               WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -233,7 +247,9 @@ function requestA($table){
 
          $req = $bd->query('SELECT * 
                                FROM Article_Journal
-                               WHERE ' . condition);
+                               WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -262,7 +278,9 @@ function requestA($table){
          
          $req = $bd->query('SELECT * 
                                FROM Article_Journal
-                               WHERE ' . condition);
+                               WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
@@ -291,7 +309,9 @@ function requestA($table){
          
          $req = $bd->query('SELECT * 
                                FROM Participation_Conference
-                               WHERE ' . condition);
+                               WHERE (' . condition . ')');
+         if(!$req)
+            echo "Erreur";
 
          echo '<ul>';
          while ($donnees = $req->fetch())
