@@ -9,14 +9,18 @@
 ?>
 <?php
 function requestA($table){
-      switch($table){
+   switch($table){
       
       // Auteur
       case 'Auteur' :
 
+         echo 'debut auteur ';
+
          $condition = "TRUE";
          if($_GET['matricule'])
             $condition .= ' AND matricule = ' . $_GET['matricule'];
+
+         echo 'après la première condition ';
 
          if($_GET['nom'])
             $condition .= ' AND nom = ' . $_GET['nom'];
@@ -30,12 +34,15 @@ function requestA($table){
          if($_GET['nom_institution'])
             $condition .= ' AND nom_institution = ' . $_GET['nom_institution'];
 
+         echo 'query de auteur ';
          $req = $bd->query('SELECT * 
                             FROM Auteur
                             WHERE (' . condition . ')');
+         echo 'apres le query ';
          if(!$req)
             echo "Erreur";
 
+         echo 'debut affichage';
          echo '<ul>';
          while ($donnees = $req->fetch())
          {
@@ -341,7 +348,7 @@ function requestA($table){
 
       Début d'affichage de 
       <?php echo 'la table :' . $_POST['table'];
-      requestA($_POST['table']); ?>
+      requestA($_POST['table']); // erreur ?>
       Fin de l'affichage de la table
 
    </body>
