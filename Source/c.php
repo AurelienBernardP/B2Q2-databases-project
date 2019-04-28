@@ -1,12 +1,12 @@
 <?php
- /*  include 'connexion_info.php';
+   include 'connexion_info.php';
    if(isset($_SESSION['connect']) AND $_SESSION['connect'] == 0){
       echo'<strong>Erreur</strong>: Impossible de voir cette page sans vous être connecter<br>';
       echo'Voici la page de connexion ---> <a href="connexion.php">Connexion</a>';
       session_destroy();
 }
 else{
-*/?>
+?>
 <html>
         <head>
                 <meta charset="utf-8" />
@@ -45,7 +45,7 @@ else{
                         <label for="publication_date">Date de publication  </label><input type="date" name="date_publi" max=<?php echo date('Y-m-d');?> required/>
                         <br/>
                         <br/>
-                        <p>matricule du premier auteur </p>
+                        <p>Matricule du premier auteur </p>
                         <select name="new article matricule" required>
                         <?php
                         //generate items of a drop down list with data from database
@@ -130,5 +130,5 @@ else{
 </html>
 <?php 
     $bd = NULL; 
-    //}
+    }
 ?>
