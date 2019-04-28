@@ -22,7 +22,7 @@ else{
             </div>
             <div id="table of subjects">
             <?php
-            $queryE = $bd->query('SELECT sujet 
+            $queryE = $db->query('SELECT sujet 
                                 FROM Sujet_Article NATURAL JOIN 
                                     (SELECT url FROM Article_Conference) AS link NATURAL JOIN
                                         (SELECT nom_conference , annee_conference

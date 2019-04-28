@@ -34,10 +34,11 @@ else{
                 <?php
                     if(isset($_POST['type_article'])){
                         ?>
-                        <form id= "conference_input_form" method="post" action="submit_new_article.php">   
+                        <form id= "conference_input_form" method="post" action="submit_new_article.php"> 
                         <p>            
                         <label for="URL">URL  </label><input type="url" name="URL"  maxlength="500" required/>            
                         <br/>
+                        <input type="hidden" name="type_article" value="<?php echo $_POST['type_article']; ?>">
                         <br/>
                         <label for="DOI">DOI  </label><input type="number" name="DOI" required/>
                         <br/>
@@ -45,17 +46,21 @@ else{
                         <label for="publication_date">Date de publication  </label><input type="date" name="date_publi" max=<?php echo date('Y-m-d');?> required/>
                         <br/>
                         <br/>
+                        
+                        <?php
+                        //generate items of a drop down list with data from database
+                        $req = $db->query("SELECT matricule
+                                            FROM Auteur
+                                            ORDER BY matricule"
+                                        );
+                        ?>
                         <p>Matricule du premier auteur </p>
                         <select name="new article matricule" required>
                         <?php
-                        //generate items of a drop down list with data from database
-                        $req = $bd->query("SELECT matricule
-                                            FROM Auteur;"
-                                        );
                         while($tuple = $req->fetch()){
-                            echo "<option value='" . $tuple['matricule'] . "'>" . $tuple['matricule'] . "</option>";
-                        } 
-                        ?>
+                            ?><option value=" <?php echo $tuple['matricule'];?>"><?php echo $tuple['matricule']; ?></option>
+
+                        <?php }?>
                         </select>
                         <br/>
                         <br/>  
@@ -65,11 +70,35 @@ else{
                         <?php   
                         switch($_POST['type_article']){
                             case "conference":
+                                $_POST['type_article'] = "conference";
                                 ?>
-                                    <label for="nom_conférence">Nom de la conférence  <input type="text" name="nom_conf" required maxlength="50"/> 
+                                    <p>Nom de la conférence </p> 
+                                    <select name="nom_conference" required>
+                                    <?php
+                                    //generate items of a drop down list with data from database
+                                    $req = $db->query("SELECT nom
+                                                        FROM Conference;"
+                                                    );
+                                    while($tuple = $req->fetch()){
+                                        echo "<option value='" . $tuple['nom'] . "'>" . $tuple['nom'] . "</option>";
+                                    } 
+                                    ?>
+                                    </select>
                                     <br/>
                                     <br/>
-                                    <label for="anne_conf">Année dans laquelle la conférance a eu lieu  <input type="number" name="year_conf"  required/>
+                                    <p>Anne de la conférence </p> 
+                                    <select name="anne_conference" required>
+                                    <?php
+                                    //generate items of a drop down list with data from database
+                                    $req = $db->query("SELECT annee
+                                                        FROM Conference
+                                                        ORDER BY annee"
+                                                    );
+                                    while($tuple = $req->fetch()){
+                                        echo "<option value='" . $tuple['annee'] . "'>" . $tuple['annee'] . "</option>";
+                                    } 
+                                    ?>
+                                    </select>
                                     <br/>
                                     <br/>
                                     <label for="type presentation">Type de présantation  <input name="type presentation" type="text" required>
@@ -79,12 +108,13 @@ else{
                                 <?php
                                 break;
                             case "journal":
+                                    $_POST['type_article'] = "journal"; 
                                 ?>  
                                     <p>nom de la revue</p>
                                     <select name="nom_revue" required>
                                     <?php
                                     //generate items of a drop down list with data from database
-                                    $req = $bd->query("SELECT nom
+                                    $req = $db->query("SELECT nom
                                                         FROM Revue;"
                                                     );
                                     while($tuple = $req->fetch()){
@@ -98,8 +128,10 @@ else{
                                     <select name="nb_journal" required>
                                     <?php
                                     //generate items of a drop down list with data from database
-                                    $req = $bd->query("SELECT n_journal
-                                                        FROM Article_Journal;"
+                                    $req = $db->query("SELECT n_journal
+                                                        FROM Article_Journal
+                                                        GROUP BY n_journal
+                                                        ORDER BY n_journal;"
                                                     );
                                     while($tuple = $req->fetch()){
                                         echo "<option value='" . $tuple['n_journal'] . "'>" . $tuple['n_journal'] . "</option>";
@@ -129,6 +161,6 @@ else{
         </body>
 </html>
 <?php 
-    $bd = NULL; 
+    $db = NULL; 
     }
 ?>
