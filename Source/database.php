@@ -189,7 +189,9 @@
                         FIELDS TERMINATED BY ';'
                         ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
-                        IGNORE 1 LINES(url, doi, titre, date_publication, matricule_premier_auteur);"
+                        IGNORE 1 LINES(url, doi, titre, date_publication, matricule_premier_auteur)
+                        SET date_publication = STR_TO_DATE(@date_publication, '%d/%m/%Y');"
+                     
                      );
 
                      echo "Article table created and loaded successfully. <br><br>";

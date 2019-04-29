@@ -86,21 +86,6 @@ else{
                                     </select>
                                     <br/>
                                     <br/>
-                                    <p>Anne de la conférence </p> 
-                                    <select name="anne_conference" required>
-                                    <?php
-                                    //generate items of a drop down list with data from database
-                                    $req = $db->query("SELECT annee
-                                                        FROM Conference
-                                                        ORDER BY annee"
-                                                    );
-                                    while($tuple = $req->fetch()){
-                                        echo "<option value='" . $tuple['annee'] . "'>" . $tuple['annee'] . "</option>";
-                                    } 
-                                    ?>
-                                    </select>
-                                    <br/>
-                                    <br/>
                                     <label for="type presentation">Type de présantation  <input name="type presentation" type="text" required>
                                     <br/>
                                     <br/>

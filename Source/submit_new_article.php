@@ -32,18 +32,32 @@ else{
             }
 
         ?>
+        <?php
+
+        ?>
         <?php 
             switch($_POST['type_article']){
                 case "conference":
+
                     $yearPubli = date("Y", strtotime($_POST['date_publi']));
 
-                    $req1 = $db->query("SELECT * FROM Conference WHERE 'annee' = ".$yearPubli."';");
+                    $req1 = $db->query("SELECT * FROM Conference WHERE annee = '".$yearPubli."' AND nom LIKE'".$_POST['nom_conference']."';");
+                    if(!($check = $req->fetch())){
+                        echo"<h2> ERROR: no conference with the same year of publication and the given name of the conference existis in the database</h2>";
+                    }
                     break;
                 case "journal":                 
                     if($_POST['page_debut'] > $_POST['page_fin']){
                         echo "<h2> error: beginning page has to be smaller or equal to end page </h2>";
                         $insertionERROR = True;
                     }
+                    $req = $db->query("SELECT * FROM Article_Journal WHERE n_journal = '".$_POST['nb_journal']."' AND nom_revue LIKE '".$_POST['nom_revue']."' ;");
+                    if($check = $req->fetch()){
+                        echo "<h2> error: La combinaison de numero de journal et nom de la revue n'éxiste pas dans la base de donees.</h2>";
+                        $insertionERROR = True;
+                    }
+
+                    
                     break;
                 default:
                     echo "<h1>Error processing type of article</h1>";
