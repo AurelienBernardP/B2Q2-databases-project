@@ -32,11 +32,11 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Institution(
-                        nom VARCHAR(50) NOT NULL,
-                        rue VARCHAR(50) NOT NULL,
-                        numero VARCHAR(5) NOT NULL,
-                        ville VARCHAR(50) NOT NULL,
-                        pays VARCHAR(50) NOT NULL,
+                        nom VARCHAR(200) NOT NULL,
+                        rue VARCHAR(200) NOT NULL,
+                        numero INT NOT NULL,
+                        ville VARCHAR(200) NOT NULL,
+                        pays VARCHAR(200) NOT NULL,
                         PRIMARY KEY (nom)
                         )engine = innodb;"
                      );
@@ -67,7 +67,7 @@
 
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Revue(
-                        nom VARCHAR(50) NOT NULL,
+                        nom VARCHAR(200) NOT NULL,
                         impact INT NOT NULL,
                         PRIMARY KEY (nom)
                         )engine=innodb;"
@@ -101,10 +101,10 @@
                      $db->exec("CREATE TABLE IF NOT EXISTS Conference(
                         nom VARCHAR(200) NOT NULL,
                         annee SMALLINT NOT NULL,
-                        rue VARCHAR(50) NOT NULL,
-                        numero VARCHAR(5) NOT NULL,
-                        ville VARCHAR(50) NOT NULL,
-                        pays VARCHAR(50) NOT NULL,
+                        rue VARCHAR(200) NOT NULL,
+                        numero INT NOT NULL,
+                        ville VARCHAR(200) NOT NULL,
+                        pays VARCHAR(200) NOT NULL,
                         PRIMARY KEY (nom, annee)
                         )engine=innodb;"
                      );
@@ -136,10 +136,10 @@
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Auteur(
                         matricule INT NOT NULL,
-                        nom VARCHAR(50) NOT NULL,
-                        prenom VARCHAR(50) NOT NULL,
+                        nom VARCHAR(200) NOT NULL,
+                        prenom VARCHAR(200) NOT NULL,
                         debut_doctorat INT NOT NULL,
-                        nom_institution VARCHAR(50) NOT NULL,
+                        nom_institution VARCHAR(200) NOT NULL,
                         PRIMARY KEY (matricule),
                         FOREIGN KEY (nom_institution)
                            REFERENCES Institution(nom)
@@ -189,7 +189,7 @@
                         FIELDS TERMINATED BY ';'
                         ENCLOSED BY ';'
                         LINES TERMINATED BY '\n'
-                        IGNORE 1 LINES(url, doi, titre, date_publication, matricule_premier_auteur)
+                        IGNORE 1 LINES(url, doi, titre, @date_publication, matricule_premier_auteur)
                         SET date_publication = STR_TO_DATE(@date_publication, '%d/%m/%Y');"
                      
                      );
@@ -211,7 +211,7 @@
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Sujet_Article(
                         url VARCHAR(500) NOT NULL,
-                        sujet VARCHAR(50) NOT NULL,
+                        sujet VARCHAR(200) NOT NULL,
                         PRIMARY KEY (url, sujet),
                         FOREIGN KEY (url)
                            REFERENCES Article(url)
@@ -353,9 +353,9 @@
                      //Creating table
                      $db->exec("CREATE TABLE IF NOT EXISTS Participation_Conference(
                         matricule INT NOT NULL,
-                        nom_conference VARCHAR(50) NOT NULL,
+                        nom_conference VARCHAR(200) NOT NULL,
                         annee_conference SMALLINT NOT NULL,
-                        tarif VARCHAR(50) NOT NULL,
+                        tarif VARCHAR(200) NOT NULL,
                         PRIMARY KEY (matricule, nom_conference, annee_conference),
                         FOREIGN KEY (matricule)
                            REFERENCES Auteur(matricule),
