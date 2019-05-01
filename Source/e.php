@@ -22,25 +22,25 @@ else{
             </div>
             <div id="table of subjects">
             <?php
-            $queryE = $db->query('SELECT sujet 
+            $queryE = $db->query('SELECT sujet, COUNT(sujet) as popu
                                 FROM Sujet_Article NATURAL JOIN 
-                                    (SELECT url FROM Article_Conference) AS link NATURAL JOIN
+                                    (SELECT * FROM Article_Conference) AS link NATURAL JOIN
                                         (SELECT nom_conference , annee_conference
-                                        FROM (SELECT nom_conference, annee_conference
-                                            FROM Participation_Conference
-                                            WHERE annee_conference >= 2012) AS conf_after2012
+                                        FROM Participation_Conference
+                                        WHERE annee_conference >= 2012
                                         GROUP BY annee_conference , nom_conference
                                         ORDER BY COUNT(*) DESC
                                         LIMIT 5) AS top_conf_by_assistance
                                 GROUP BY sujet 
-                                ORDER BY COUNT(sujet) DESC');
-            echo "<h3><center>"."Sujets en ordre d'écroissant de popularité"."</center><h3>";
+                                ORDER BY COUNT(sujet) DESC');                                
+            echo "<h2><center>"."Sujets en ordre d'écroissant de popularité"."</center></h2>";
             while($tupleE = $queryE->fetch()){
-                echo "<p>".$tupleE['sujet']."</p>";
+                echo "<center><p>".$tupleE['popu']." ".htmlentities($tupleE['sujet'])."</p></center>";
             }
         
             ?>
             </div>
+          <center><button name="back_to_main" type="submit" onclick="location.href = 'main_menu.php';" value="back_to_main">Go back to main menu</button></center>
         </body>
 </html>
 <?php 

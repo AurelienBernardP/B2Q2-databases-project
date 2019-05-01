@@ -35,10 +35,10 @@ else{
                     if(isset($_POST['type_article'])){
                         ?>
                         <form id= "conference_input_form" method="post" action="submit_new_article.php"> 
-                        <p>            
-                        <label for="URL">URL  </label><input type="url" name="URL"  maxlength="500" required/>            
-                        <br/>
+                        <p>
                         <input type="hidden" name="type_article" value="<?php echo $_POST['type_article']; ?>">
+                        <br/>            
+                        <label for="URL">URL  </label><input type="url" name="URL"  maxlength="500" required/>            
                         <br/>
                         <label for="DOI">DOI  </label><input type="number" name="DOI" required/>
                         <br/>
@@ -54,17 +54,17 @@ else{
                                             ORDER BY matricule"
                                         );
                         ?>
-                        <p>Matricule du premier auteur </p>
-                        <select name="new article matricule" required>
+                        <p>Matricule du premier auteur 
+                        <select name="matricule" required>
                         <?php
                         while($tuple = $req->fetch()){
                             ?><option value=" <?php echo $tuple['matricule'];?>"><?php echo $tuple['matricule']; ?></option>
 
                         <?php }?>
-                        </select>
+                        </select></p>
                         <br/>
                         <br/>  
-                        <label for="titre">Titre de l'article  <input type="text" name="titre article" required maxlength="50" />
+                        <label for="titre_article">Titre de l'article  <input type="text" name="titre_article" required maxlength="200" />
                         <br/>
                         <br/>                                    
                         <?php   
@@ -72,7 +72,7 @@ else{
                             case "conference":
                                 $_POST['type_article'] = "conference";
                                 ?>
-                                    <p>Nom de la conférence </p> 
+                                    <p>Nom de la conférance 
                                     <select name="nom_conference" required>
                                     <?php
                                     //generate items of a drop down list with data from database
@@ -80,13 +80,13 @@ else{
                                                         FROM Conference;"
                                                     );
                                     while($tuple = $req->fetch()){
-                                        echo "<option value='" . $tuple['nom'] . "'>" . $tuple['nom'] . "</option>";
+                                        echo "<option value='" . $tuple['nom'] . "'>" . htmlentities($tuple['nom']) . "</option>";
                                     } 
                                     ?>
-                                    </select>
+                                    </select></p> 
                                     <br/>
                                     <br/>
-                                    <label for="type presentation">Type de présantation  <input name="type presentation" type="text" required>
+                                    <label for="type_presentation">Type de présantation  <input name="type_presentation" type="text" maxlength="200" required>
                                     <br/>
                                     <br/>
                                     <button name="submit_article" type="submit" value="submit_conf">Mettre à jour la BD</button>
@@ -95,7 +95,7 @@ else{
                             case "journal":
                                     $_POST['type_article'] = "journal"; 
                                 ?>  
-                                    <p>nom de la revue</p>
+                                    <p>nom de la revue
                                     <select name="nom_revue" required>
                                     <?php
                                     //generate items of a drop down list with data from database
@@ -103,13 +103,13 @@ else{
                                                         FROM Revue;"
                                                     );
                                     while($tuple = $req->fetch()){
-                                        echo "<option value='" . $tuple['nom'] . "'>" . $tuple['nom'] . "</option>";
+                                        echo "<option value='" . $tuple['nom'] . "'>" . htmlentities($tuple['nom']) . "</option>";
                                     } 
                                     ?>
-                                    </select>
-                                    <br/>
-                                    <br/>
-                                    <p>Numero du journal la publiant</p>
+                                    </select></p>
+                                    
+                    
+                                    <p>Numero du journal la publiant
                                     <select name="nb_journal" required>
                                     <?php
                                     //generate items of a drop down list with data from database
@@ -122,13 +122,13 @@ else{
                                         echo "<option value='" . $tuple['n_journal'] . "'>" . $tuple['n_journal'] . "</option>";
                                     } 
                                     ?>
-                                    </select>
+                                    </select></p>
                                     <br/>
                                     <br/>
-                                    <label for="page_debut">Page ou l'article commence  <input type="number" min = "1"required name="pg_debut" />
+                                    <label for="page_debut">Page ou l'article commence  <input type="number" min = "1"required name="page_debut" />
                                     <br/>
                                     <br/>
-                                    <label for="page_fin">Page ou l'article termine  <input type="number" min = "1"required name="pg_fin" />
+                                    <label for="page_fin">Page ou l'article termine  <input type="number" min = "1"required name="page_fin" />
                                     <br/>
                                     <br/>  
                                     <button name="submit_article" type="submit"   value="submit_journal">Mettre à jour la BD</button> 
