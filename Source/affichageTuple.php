@@ -7,334 +7,6 @@
    }
    else{
 ?>
-<?php
-function requestA($table){
-   switch($table){
-      
-      // Auteur
-      case 'Auteur' :
-
-         echo 'debut auteur ';
-
-         $condition = "TRUE";
-         if($_GET['matricule'])
-            $condition .= ' AND matricule = ' . $_GET['matricule'];
-
-         echo 'après la première condition ';
-
-         if($_GET['nom'])
-            $condition .= ' AND nom = ' . $_GET['nom'];
-
-         if($_GET['prenom'])
-            $condition .= ' AND prenom = ' . $_GET['prenom'];
-
-         if($_GET['debut_doctorat'])
-            $condition .= ' AND debut_doctorat = ' . $_GET['debut_doctorat'];
-
-         if($_GET['nom_institution'])
-            $condition .= ' AND nom_institution = ' . $_GET['nom_institution'];
-
-         echo 'query de auteur ';
-         $req = $bd->query('SELECT * 
-                            FROM Auteur
-                            WHERE (' . condition . ')');
-         echo 'apres le query ';
-         if(!$req)
-            echo "Erreur";
-
-         echo 'debut affichage';
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li> Auteur :' . $donnees['matricule'] . ' ' . $donnees['nom'] . ' ' . $donnees['prenom'] . ' ' . $donnees['debut_doctorat'] . ' ' . $donnees['nom_institution'] . '</li>';
-         }
-         echo '</ul>';
-         $req->closeCursor();
-         break;
-
-      // Institution
-      case "Institution":
-
-         $condition = "TRUE";
-         if($_GET['nom'])
-            $condition .= ' AND nom = ' . $_GET['nom'];
-
-         if($_GET['rue'])
-            $condition .= ' AND rue = ' . $_GET['rue'];
-
-         if($_GET['numero'])
-            $condition .= ' AND numero = ' . $_GET['numero'];
-
-         if($_GET['ville'])
-            $condition .= ' AND ville = ' . $_GET['ville'];
-
-         if($_GET['pays'])
-            $condition .= ' AND pays = ' . $_GET['pays'];
-
-         $req = $bd->query('SELECT * 
-                            FROM Institution
-                            WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['nom'] . ' ' . $donnees['rue'] . ' ' . $donnees['numero'] . ' ' . $donnees['ville'] . ' ' . $donnees['pays'] . '</li>';
-         }
-         echo '</ul>';
-         break;
-         $req->closeCursor();
-
-      // Revue
-      case "Revue":
-         
-         $condition = 'TRUE';
-         if($_GET['nom'])
-            $condition .= ' AND nom = ' . $_GET['nom'];
-
-         if($_GET['impact'])
-            $condition .= ' AND impact = ' . $_GET['impact'];
-         
-         $req = $bd->query('SELECT * 
-                            FROM Revue
-                            WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['nom'] . ' ' . $donnees['impact'] . '</li>';
-         }
-         echo '</ul>';
-         break;
-         $req->closeCursor();
-
-      // Conference
-      case "Conference":
-
-         $condition = "TRUE";
-         if($_GET['nom'])
-            $condition .= ' AND nom = ' . $_GET['nom'];
-
-         if($_GET['annee'])
-            $condition .= ' AND annee = ' . $_GET['annee'];
-
-         if($_GET['rue'])
-            $condition .= ' AND rue = ' . $_GET['rue'];
-
-         if($_GET['numero'])
-            $condition .= ' AND numero = ' . $_GET['numero'];
-
-         if($_GET['ville'])
-            $condition .= ' AND ville = ' . $_GET['ville'];
-
-         if($_GET['pays'])
-            $condition .= ' AND pays = ' . $_GET['pays'];
-
-         $req = $bd->query('SELECT * 
-                               FROM Conference
-                               WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['nom'] . ' ' . $donnees['annee'] . ' ' . $donnees['rue'] . ' ' . $donnees['numero'] . ' ' . $donnees['ville'] . ' ' . $donnees['pays'] . '</li>';
-         }
-         echo '</ul>';
-         break;
-         $req->closeCursor();
-
-      // Article
-      case "Article":
-
-         $condition = "TRUE";
-         if($_GET['url'])
-            $condition .= ' AND url = ' . $_GET['url'];
-
-         if($_GET['doi'])
-            $condition .= ' AND doi = ' . $_GET['doi'];
-
-         if($_GET['titre'])
-            $condition .= ' AND titre = ' . $_GET['titre'];
-
-         if($_GET['date_publication'])
-            $condition .= ' AND date_publication = ' . $_GET['date_publication'];
-
-         if($_GET['matricule_premier_auteur'])
-            $condition .= ' AND matricule_premier_auteur = ' . $_GET['matricule_premier_auteur'];
-      
-         $req = $bd->query('SELECT * 
-                             FROM Article
-                             WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['url'] . ' ' . $donnees['doi'] . ' ' . $donnees['titre'] . ' ' . $donnees['date_publication'] . ' ' . $donnees['matricule_premier_auteur'] . '</li>';
-         }
-         echo '</ul>';
-
-         $req->closeCursor();
-         break;
-
-      // Sujet_Article
-      case "Sujet_Article":
-
-         $condition = "TRUE";
-         if($_GET['url'])
-            $condition .= ' AND url = ' . $_GET['url'];
-
-         if($_GET['sujet'])
-            $condition .= ' AND sujet = ' . $_GET['sujet'];
-
-         $req = $bd->query('SELECT * 
-                               FROM Sujet_Article
-                               WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['url'] . ' ' . $donnees['sujet'] . '</li>';
-         }
-         echo '</ul>';
-         break;
-         $req->closeCursor();
-
-      // Second_Auteur
-      case "Second_Auteur":
-
-         $condition = "TRUE";
-         if($_GET['url'])
-            $condition .= ' AND url = ' . $_GET['url'];
-
-         if($_GET['matricule_second_auteur'])
-            $condition .= ' AND matricule_second_auteur = ' . $_GET['matricule_second_auteur'];
-
-         $req = $bd->query('SELECT * 
-                               FROM Second_Auteur
-                               WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['url'] . ' ' . $donnees['matricule_second_auteur'] . '</li>';
-         }
-         echo '</ul>';
-         break;
-         $req->closeCursor();
-
-      // Article de Journal
-      case "Article_Journal":
-
-         $condition = "TRUE";
-         if($_GET['url'])
-            $condition .= ' AND url = ' . $_GET['url'];
-
-         if($_GET['pg_debut'])
-            $condition .= ' AND pg_debut = ' . $_GET['pg_debut'];
-
-         if($_GET['pg_fin'])
-            $condition .= ' AND pg_fin = ' . $_GET['pg_fin'];
-
-         if($_GET['nom_revue'])
-            $condition .= ' AND nom_revue = ' . $_GET['nom_revue'];
-
-         if($_GET['n_journal'])
-            $condition .= ' AND n_journal = ' . $_GET['n_journal'];
-
-         $req = $bd->query('SELECT * 
-                               FROM Article_Journal
-                               WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['url'] . ' ' . $donnees['pg_debut'] . ' ' . $donnees['pg_fin'] . ' ' . $donnees['nom_revue'] . ' ' . $donnees['n_journal'] . '</li>';
-         }
-         echo '</ul>';
-         break;
-         $req->closeCursor();
-   
-      // Article de Conférence
-      case "Article_Conference":
-
-         $condition = "TRUE";
-         if($_GET['url'])
-            $condition .= ' AND url = ' . $_GET['url'];
-
-         if($_GET['presentation'])
-            $condition .= ' AND presentation = ' . $_GET['presentation'];
-
-         if($_GET['nom_conference'])
-            $condition .= ' AND nom_conference = ' . $_GET['nom_conference'];
-
-         if($_GET['annee_conference'])
-            $condition .= ' AND annee_conference = ' . $_GET['annee_conference'];
-         
-         $req = $bd->query('SELECT * 
-                               FROM Article_Journal
-                               WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['url'] . ' ' . $donnees['presentation'] . ' ' . $donnees['nom_conference'] . ' ' . $donnees['annee_conference'] . '</li>';
-         }
-         echo '</ul>';
-         break;
-         $req->closeCursor();
-
-      // Participation_Conference
-      case "Participation_Conference":
-
-         $condition = "TRUE";
-         if($_GET['matricule'])
-            $condition .= ' AND matricule = ' . $_GET['matricule'];
-
-         if($_GET['nom_conference'])
-            $condition .= ' AND nom_conference = ' . $_GET['nom_conference'];
-
-         if($_GET['annee_conference'])
-            $condition .= ' AND annee_conference = ' . $_GET['annee_conference'];
-
-         if($_GET['tarif'])
-            $condition .= ' AND tarif = ' . $_GET['tarif'];
-         
-         $req = $bd->query('SELECT * 
-                               FROM Participation_Conference
-                               WHERE (' . condition . ')');
-         if(!$req)
-            echo "Erreur";
-
-         echo '<ul>';
-         while ($donnees = $req->fetch())
-         {
-	         echo '<li>' . $donnees['matricule'] . ' ' . $donnees['nom_conference'] . ' ' . $donnees['annee_conference'] . ' ' . $donnees['tarif'] . '</li>';
-         }
-         echo '</ul>';
-         break;
-         $req->closeCursor();
-
-      default:
-         echo $tuple . ' n\'est pas une table de la base de donnée.' . '</br>';
-         break;
-   }
-}
-?>
 
 <!DOCTYPE html>
 <html>
@@ -347,9 +19,354 @@ function requestA($table){
       <br/>
 
       Début d'affichage de 
-      <?php echo 'la table :' . $_POST['table'];
-      requestA($_POST['table']); // erreur ?>
-      Fin de l'affichage de la table
+      <?php echo 'la table : ' . $_POST['table'] . '</br> ';
+
+      // remove all dangerous character to prevent from sql injections
+      foreach($_POST as $key => $value){
+         echo "POST parameter '$key' has '$value'";
+         str_replace(«’»,«\’», $_POST[$key]);
+      }
+
+      switch($_POST['table']){
+      
+         // Auteur
+         case 'Auteur' :
+   
+            $condition = "TRUE";
+            if(!empty($_POST['matricule'])){
+               //str_replace(«’»,«\’», $_POST['matricule']);
+               $condition .= " AND matricule = " . $_POST['matricule'];
+            }
+   
+            if(!empty($_POST['nom']))
+               $condition .= " AND nom = " . $_POST['nom'];
+   
+            if(!empty($_POST['prenom'])){
+               $condition .= ' AND prenom = \'' . $_POST['prenom'] . '\'';
+            }
+   
+            if(!empty($_POST['debut_doctorat']))
+               $condition .= " AND debut_doctorat = " . $_POST['debut_doctorat'];
+   
+            if(!empty($_POST['nom_institution']))
+               $condition .= " AND nom_institution = " . $_POST['nom_institution'];
+
+            $query = 'SELECT * FROM Auteur WHERE (' . $condition . ')';
+            echo $query;
+
+            $req = $db->query($query);
+
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['matricule'] . ' ' . $data['nom'] . ' ' . $data['prenom'] . ' ' . $data['debut_doctorat'] . ' ' . $data['nom_institution'] . '</li>';
+            }
+            echo '</ul>';
+
+            $req->closeCursor();
+            break;
+   
+         // Institution
+         case "Institution":
+   
+            $condition = "TRUE";
+            if($_POST['nom'])
+               $condition .= " AND nom = " . $_POST['nom'];
+   
+            if($_POST['rue'])
+               $condition .= " AND rue = " . $_POST['rue'];
+   
+            if($_POST['numero'])
+               $condition .= " AND numero = " . $_POST['numero'];
+   
+            if($_POST['ville'])
+               $condition .= " AND ville = " . $_POST['ville'];
+   
+            if($_POST['pays'])
+               $condition .= " AND pays = " . $_POST['pays'];
+   
+               echo $condition;
+
+            $req = $db->query('SELECT * 
+                               FROM Institution
+                               WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['nom'] . ' ' . $data['rue'] . ' ' . $data['numero'] . ' ' . $data['ville'] . ' ' . $data['pays'] . '</li>';
+            }
+            echo '</ul>';
+            break;
+            $req->closeCursor();
+   
+         // Revue
+         case "Revue":
+            
+            $condition = 'TRUE';
+            if($_POST['nom'])
+               $condition .= " AND nom = " . $_POST['nom'];
+   
+            if($_POST['impact'])
+               $condition .= " AND impact = " . $_POST['impact'];
+            
+            echo $condition;
+            $req = $db->query('SELECT * 
+                               FROM Revue
+                               WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['nom'] . ' ' . $data['impact'] . '</li>';
+            }
+            echo '</ul>';
+            break;
+            $req->closeCursor();
+   
+         // Conference
+         case "Conference":
+   
+            $condition = "TRUE";
+            if($_POST['nom'])
+               $condition .= " AND nom = " . $_POST['nom'];
+   
+            if($_POST['annee'])
+               $condition .= " AND annee = " . $_POST['annee'];
+   
+            if($_POST['rue'])
+               $condition .= " AND rue = " . $_POST['rue'];
+   
+            if($_POST['numero'])
+               $condition .= " AND numero = " . $_POST['numero'];
+   
+            if($_POST['ville'])
+               $condition .= " AND ville = " . $_POST['ville'];
+   
+            if($_POST['pays'])
+               $condition .= " AND pays = " . $_POST['pays'];
+   
+               echo $condition;
+
+            $req = $db->query('SELECT * 
+                                  FROM Conference
+                                  WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['nom'] . ' ' . $data['annee'] . ' ' . $data['rue'] . ' ' . $data['numero'] . ' ' . $data['ville'] . ' ' . $data['pays'] . '</li>';
+            }
+            echo '</ul>';
+            break;
+            $req->closeCursor();
+   
+         // Article
+         case "Article":
+   
+            $condition = "TRUE";
+            if($_POST['url'])
+               $condition .= " AND url = " . $_POST['url'];
+   
+            if($_POST['doi'])
+               $condition .= " AND doi = " . $_POST['doi'];
+   
+            if($_POST['titre'])
+               $condition .= " AND titre = ". $_POST['titre'];
+   
+            if($_POST['date_publication'])
+               $condition .= " AND date_publication = " . $_POST['date_publication'];
+   
+            if($_POST['matricule_premier_auteur'])
+               $condition .= " AND matricule_premier_auteur = " . $_POST['matricule_premier_auteur'];
+         
+               echo $condition;
+
+            $req = $db->query('SELECT * 
+                                FROM Article
+                                WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['url'] . ' ' . $data['doi'] . ' ' . $data['titre'] . ' ' . $data['date_publication'] . ' ' . $data['matricule_premier_auteur'] . '</li>';
+            }
+            echo '</ul>';
+   
+            $req->closeCursor();
+            break;
+   
+         // Sujet_Article
+         case "Sujet_Article":
+   
+            $condition = "TRUE";
+            if($_POST['url'])
+               $condition .= " AND url = ". $_POST['url'];
+   
+            if($_POST['sujet'])
+               $condition .= " AND sujet = " . $_POST['sujet'];
+   
+               echo $condition;
+
+            $req = $db->query('SELECT * 
+                                  FROM Sujet_Article
+                                  WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['url'] . ' ' . $data['sujet'] . '</li>';
+            }
+            echo '</ul>';
+            break;
+            $req->closeCursor();
+   
+         // Second_Auteur
+         case "Second_Auteur":
+   
+            $condition = "TRUE";
+            if($_POST['url'])
+               $condition .= " AND url = " . $_POST['url'];
+   
+            if($_POST['matricule_second_auteur'])
+               $condition .= " AND matricule_second_auteur = " . $_POST['matricule_second_auteur'];
+   
+               echo $condition;
+
+            $req = $db->query('SELECT * 
+                                  FROM Second_Auteur
+                                  WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['url'] . ' ' . $data['matricule_second_auteur'] . '</li>';
+            }
+            echo '</ul>';
+            break;
+            $req->closeCursor();
+   
+         // Article de Journal
+         case "Article_Journal":
+   
+            $condition = "TRUE";
+            if($_POST['url'])
+               $condition .= " AND url = " . $_POST['url'];
+   
+            if($_POST['pg_debut'])
+               $condition .= " AND pg_debut = " . $_POST['pg_debut'];
+   
+            if($_POST['pg_fin'])
+               $condition .= " AND pg_fin = " . $_POST['pg_fin'];
+   
+            if($_POST['nom_revue'])
+               $condition .= " AND nom_revue = " . $_POST['nom_revue'];
+   
+            if($_POST['n_journal'])
+               $condition .= " AND n_journal = " . $_POST['n_journal'];
+   
+               echo $condition;
+
+            $req = $db->query('SELECT * 
+                                  FROM Article_Journal
+                                  WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['url'] . ' ' . $data['pg_debut'] . ' ' . $data['pg_fin'] . ' ' . $data['nom_revue'] . ' ' . $data['n_journal'] . '</li>';
+            }
+            echo '</ul>';
+            break;
+            $req->closeCursor();
+      
+         // Article de Conférence
+         case "Article_Conference":
+   
+            $condition = "TRUE";
+            if($_POST['url'])
+               $condition .= " AND url = " . $_POST['url'];
+   
+            if($_POST['presentation'])
+               $condition .= " AND presentation = " . $_POST['presentation'];
+   
+            if($_POST['nom_conference'])
+               $condition .= " AND nom_conference = " . $_POST['nom_conference'];
+   
+            if($_POST['annee_conference'])
+               $condition .= " AND annee_conference = " . $_POST['annee_conference'];
+            
+               echo $condition;
+
+            $req = $db->query('SELECT * 
+                                  FROM Article_Journal
+                                  WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['url'] . ' ' . $data['presentation'] . ' ' . $data['nom_conference'] . ' ' . $data['annee_conference'] . '</li>';
+            }
+            echo '</ul>';
+            break;
+            $req->closeCursor();
+   
+         // Participation_Conference
+         case "Participation_Conference":
+   
+            $condition = "TRUE";
+            if($_POST['matricule'])
+               $condition .= " AND matricule = " . $_POST['matricule'];
+   
+            if($_POST['nom_conference'])
+               $condition .= " AND nom_conference = " . $_POST['nom_conference'];
+   
+            if($_POST['annee_conference'])
+               $condition .= " AND annee_conference = " . $_POST['annee_conference'];
+   
+            if($_POST['tarif'])
+               $condition .= " AND tarif = " . $_POST['tarif'];
+            
+               echo $condition;
+
+            $req = $db->query('SELECT * 
+                                  FROM Participation_Conference
+                                  WHERE (' . $condition . ')');
+            if(!$req)
+               echo "Erreur";
+   
+            echo '<ul>';
+            while ($data = $req->fetch())
+            {
+               echo '<li>' . $data['matricule'] . ' ' . $data['nom_conference'] . ' ' . $data['annee_conference'] . ' ' . $data['tarif'] . '</li>';
+            }
+            echo '</ul>';
+            break;
+            $req->closeCursor();
+   
+         default:
+            echo $tuple . ' n\'est pas une table de la base de donnée.' . '</br>';
+            break;
+      }?>
 
    </body>
 </html>

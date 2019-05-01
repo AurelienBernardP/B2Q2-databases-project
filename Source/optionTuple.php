@@ -69,17 +69,17 @@
 
                <p>
                   Entrer le nom :
-                  <input type="text" name="doi" />
+                  <input type="text" name="nom" />
                </p>
 
                <p>
                   Entrer le prénom :
-                  <input type="text" name="titre" />
+                  <input type="text" name="prenom" />
                </p>
 
                <p>
                   Entrer la date de début de doctorat :
-                  <input type="text" name="date_publication" />
+                  <input type="text" name="debut_doctorat" />
                </p>
 
 
