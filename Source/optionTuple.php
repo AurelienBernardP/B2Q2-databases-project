@@ -18,6 +18,10 @@
    <body>
       <h1><center>Tuples de la table <?php echo $_POST['table'] ?></center></h1>
       <br/>
+
+      <h3><a href="a.php"><center>Choisir une autre table</center></a></h3>
+      <h3><a href="main_menu.php"><center>Revenir vers le menu</center></a></h3>
+      
       <p>
       Affiner votre recherche :
       </p>
