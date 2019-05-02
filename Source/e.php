@@ -35,11 +35,17 @@ else{
                                         LIMIT 5) AS top_conf_by_assistance
                                 GROUP BY sujet 
                                 ORDER BY COUNT(sujet) DESC');                                
-            echo "<h2><center>"."Sujets en ordre d'écroissant de popularité"."</center></h2>";
+            
+                  echo "<table align='center' border='1px' style='width:600px; line-height:40px;'>";
+                  echo "<tr> <th colspan='4'><h2> Sujets les plus étudiés</h2></th> </tr>";
+                  echo "<t><th>Rang</th> <th>Sujet</th> <th>Nombre de fois étudié</th> </t>";
             while($tupleE = $queryE->fetch()){
                 echo "<center><p>".$tupleE['popu']." ".htmlentities($tupleE['sujet'])."</p></center>";
+                echo "<tr><td> $tupleE['popu'] </td>";
+                     echo "<td> htmlentities($tupleE['sujet']) </td>";
+                     echo "<td> numero </td></tr>";
             }
-        
+            echo "</table>";
             ?>
             </div>
           <center><button name="back_to_main" type="submit" onclick="location.href = 'main_menu.php';" value="back_to_main">Go back to main menu</button></center>
