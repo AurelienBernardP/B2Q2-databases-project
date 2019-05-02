@@ -41,8 +41,8 @@ else{
                   echo "<t><th>Rang</th> <th>Sujet</th> <th>Nombre de fois étudié</th> </t>";
             while($tupleE = $queryE->fetch()){
                 echo "<center><p>".$tupleE['popu']." ".htmlentities($tupleE['sujet'])."</p></center>";
-                echo "<tr><td> $tupleE['popu'] </td>";
-                     echo "<td> htmlentities($tupleE['sujet']) </td>";
+                echo "<tr><td> ".$tupleE['popu'] ."</td>";
+                     echo "<td>". htmlentities($tupleE['sujet']) ."</td>";
                      echo "<td> numero </td></tr>";
             }
             echo "</table>";
