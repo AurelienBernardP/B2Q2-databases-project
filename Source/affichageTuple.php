@@ -21,22 +21,14 @@
       Début d'affichage de 
       <?php echo 'la table : ' . $_POST['table'] . '</br> ';
 
-      // remove all dangerous character to prevent from sql injections
-      foreach($_POST as $key => $value){
-         echo "POST parameter '$key' has '$value'";
-         str_replace(«’»,«\’», $_POST[$key]);
-      }
-
       switch($_POST['table']){
       
          // Auteur
          case 'Auteur' :
    
             $condition = "TRUE";
-            if(!empty($_POST['matricule'])){
-               //str_replace(«’»,«\’», $_POST['matricule']);
+            if(!empty($_POST['matricule']))
                $condition .= " AND matricule = " . $_POST['matricule'];
-            }
    
             if(!empty($_POST['nom']))
                $condition .= " AND nom = " . $_POST['nom'];
