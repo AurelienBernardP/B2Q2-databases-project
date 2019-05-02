@@ -8,10 +8,11 @@
 else{
 ?>
 <html>
-        <head>
-                <meta charset="utf-8" />
-                   <title>Ajouter un article</title>
-        </head>
+    <header>
+        <meta charset="utf-8" />
+        <title> Inserer article </title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </header>
         <body>
             <div id= article_type_choice>
                 <h1><center>Ajouter un article</center></h1>

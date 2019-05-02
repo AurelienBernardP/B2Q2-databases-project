@@ -9,10 +9,12 @@
 else{
 ?>
 <html>
-        <head>
-                <meta charset="utf-8" />
-                   <title>Top sujets</title>
-        </head>
+    <header>
+      <meta charset="utf-8" />
+      <title> Trouver top sujets </title>
+         <link rel="stylesheet" type="text/css" href="style.css">
+   </header>
+
         <body>
             <div id="title top subjects">
                 <h1><center>liste des sujets les plus populaires au cours des 5 conférences les plus populaires depuis 2012</center></h1>
