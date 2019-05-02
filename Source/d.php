@@ -37,12 +37,9 @@
       <h1><center>Requête D</center></h1>
       <br/>
 
-
       <p>
       Les chercheurs ayant écrit au moins un article en tant que premier auteur à toutes les conférences aucquelles ils ont participé : 
-      </p>
-
-      
+      </p>      
          
          <?php
          echo $que;
@@ -55,6 +52,7 @@
          $req->closeCursor();
       ?>
 
+      <center><button name="back_to_main" type="submit" onclick="location.href = 'main_menu.php';" value="back_to_main">Go back to main menu</button></center>
    </body>
 </html>
 <?php } ?>

@@ -16,6 +16,12 @@
    <body>
       <h1><center>Requête A</center></h1>
       <br/>
+
+      <br/>
+      <h3><a href="main_menu.php"><center>revenir vers le menu</center></a></h3>
+      <br/>
+
+
       <p>
       Veuillez sélectionner le tuple recherché :
       </p>

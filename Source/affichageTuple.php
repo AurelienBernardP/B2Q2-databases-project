@@ -16,10 +16,12 @@
 </head>
    <body>
       <h1><center>Résultat requête A</center></h1>
+
+      <h3><a href="a.php"><center>Choisir une autre table</center></a></h3>
+
       <br/>
 
-      Début d'affichage de 
-      <?php echo 'la table : ' . $_POST['table'] . '</br> ';
+      <?php 
 
       switch($_POST['table']){
       
@@ -33,9 +35,8 @@
             if(!empty($_POST['nom']))
                $condition .= " AND nom = " . $_POST['nom'];
    
-            if(!empty($_POST['prenom'])){
+            if(!empty($_POST['prenom']))
                $condition .= ' AND prenom = \'' . $_POST['prenom'] . '\'';
-            }
    
             if(!empty($_POST['debut_doctorat']))
                $condition .= " AND debut_doctorat = " . $_POST['debut_doctorat'];
@@ -44,7 +45,6 @@
                $condition .= " AND nom_institution = " . $_POST['nom_institution'];
 
             $query = 'SELECT * FROM Auteur WHERE (' . $condition . ')';
-            echo $query;
 
             $req = $db->query($query);
 
@@ -79,8 +79,6 @@
    
             if($_POST['pays'])
                $condition .= " AND pays = " . $_POST['pays'];
-   
-               echo $condition;
 
             $req = $db->query('SELECT * 
                                FROM Institution
@@ -106,8 +104,7 @@
    
             if($_POST['impact'])
                $condition .= " AND impact = " . $_POST['impact'];
-            
-            echo $condition;
+
             $req = $db->query('SELECT * 
                                FROM Revue
                                WHERE (' . $condition . ')');
@@ -144,8 +141,6 @@
    
             if($_POST['pays'])
                $condition .= " AND pays = " . $_POST['pays'];
-   
-               echo $condition;
 
             $req = $db->query('SELECT * 
                                   FROM Conference
@@ -180,8 +175,6 @@
    
             if($_POST['matricule_premier_auteur'])
                $condition .= " AND matricule_premier_auteur = " . $_POST['matricule_premier_auteur'];
-         
-               echo $condition;
 
             $req = $db->query('SELECT * 
                                 FROM Article
@@ -208,8 +201,6 @@
    
             if($_POST['sujet'])
                $condition .= " AND sujet = " . $_POST['sujet'];
-   
-               echo $condition;
 
             $req = $db->query('SELECT * 
                                   FROM Sujet_Article
@@ -235,8 +226,6 @@
    
             if($_POST['matricule_second_auteur'])
                $condition .= " AND matricule_second_auteur = " . $_POST['matricule_second_auteur'];
-   
-               echo $condition;
 
             $req = $db->query('SELECT * 
                                   FROM Second_Auteur
@@ -271,8 +260,6 @@
    
             if($_POST['n_journal'])
                $condition .= " AND n_journal = " . $_POST['n_journal'];
-   
-               echo $condition;
 
             $req = $db->query('SELECT * 
                                   FROM Article_Journal
@@ -304,11 +291,9 @@
    
             if($_POST['annee_conference'])
                $condition .= " AND annee_conference = " . $_POST['annee_conference'];
-            
-               echo $condition;
 
             $req = $db->query('SELECT * 
-                                  FROM Article_Journal
+                                  FROM Article_Conference
                                   WHERE (' . $condition . ')');
             if(!$req)
                echo "Erreur";
@@ -337,8 +322,6 @@
    
             if($_POST['tarif'])
                $condition .= " AND tarif = " . $_POST['tarif'];
-            
-               echo $condition;
 
             $req = $db->query('SELECT * 
                                   FROM Participation_Conference
@@ -358,8 +341,11 @@
          default:
             echo $tuple . ' n\'est pas une table de la base de donnée.' . '</br>';
             break;
+
+      
       }?>
 
+      <center><button name="back_to_main" type="submit" onclick="location.href = 'main_menu.php';" value="back_to_main">Go back to main menu</button></center>
    </body>
 </html>
 <?php } ?>
